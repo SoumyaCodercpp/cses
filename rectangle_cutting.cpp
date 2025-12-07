@@ -77,39 +77,38 @@ ll fact2(ll n){
     return (n*(n-1))/2;
 }
  
+ll N=501;
+ vvl dp(N,vector<ll>(N,INT_MAX));
+ 
+ 
  
  
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
  
-    ll n,x;
-    cin>>n>>x;
-    vl a(n);
-    read(a);
+ ll a,b;
+ cin>>a>>b;
  
-    
+for(ll i=1;i<=a;i++){
+    for(ll j=1;j<=b;j++){
+        if(i==j) dp[i][j]=0;
  
-    vl dp(x+1,INT_MAX);
-    dp[0]=0;
-    f(1,x+1,1){
- 
-        for(int j=0;j<n;j++){
-            if((i-a[j])>=0){
-                dp[i]=min(dp[i],1+dp[i-a[j]]);
+        else{
+            for(int k=1;k<i;k++){
+                dp[i][j]=min(dp[i][j],dp[i-k][j]+dp[k][j]+1);
+            }
+            for(int k=1;k<j;k++){
+                dp[i][j]=min(dp[i][j],dp[i][j-k]+dp[i][k]+1);
             }
         }
- 
     }
  
-    if(dp[x]==INT_MAX) cout<<-1<<endl;
-    else cout<<dp[x]<<endl; 
+ }
  
  
  
- 
- 
- 
+ cout<<dp[a][b]<<endl;
  
  
 }
